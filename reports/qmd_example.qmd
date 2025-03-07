@@ -36,7 +36,7 @@ Results
 #| label: fig-horse-pops
 #| fig-cap: "Horse populations for all provinces in Canada from 1906 - 1972."
 #| fig-width: 100
-knitr::include_graphics("results/horse_pops_plot.png")
+knitr::include_graphics("../results/horse_pops_plot.png")
 ```
 
 We can see from @fig-horse-pops that Ontario, Saskatchewan and Alberta 
@@ -55,7 +55,7 @@ We present the standard deviations in @tbl-horses-sd.
 ```{r}
 #| label: tbl-horses-sd
 #| tbl-cap: "Standard deviation of historical (1906-1972) horse populations for each Canadian province."
-horses_sd_table <- read_csv("results/horses_sd.csv")
+horses_sd_table <- read_csv("../results/horses_sd.csv")
 largest_sd <- horses_sd_table$Province[1]
 knitr::kable(horses_sd_table)
 ```
@@ -70,7 +70,7 @@ Additionally, note that in Table 1 we consider the sample standard deviation of 
 #| label: fig-horse-largest-sd
 #| fig-cap: "Horse populations for the province with the largest standard deviation."
 #| fig-width: 70
-knitr::include_graphics("results/horse_pop_plot_largest_sd.png")
+knitr::include_graphics("../results/horse_pop_plot_largest_sd.png")
 ```
 
 In @fig-horse-largest-sd we zoom in and look at the province of `r largest_sd`, which had the largest spread of values in terms of standard deviation.
