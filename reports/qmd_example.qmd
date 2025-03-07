@@ -3,9 +3,12 @@ title: "DSCI 310: Historical Horse Population in Canada"
 author: "Tiffany Timbers & Jordan Bourak"
 format: html
 editor: source
+toc: true
+bibliography: references.bib
 ---
 
 ```{r}
+#| echo: false
 library(tidyverse)
 ```
 
@@ -18,22 +21,25 @@ Data
 
 Horse population data were sourced from the 
 [Government of Canada's Open Data website](http://open.canada.ca/en/open-data) 
-(Government of Canada, 2017a and Government of Canada, 2017b).
+[@horses1; @horses2].
 
 Methods
 
-The R programming language (R Core Team, 2019) 
+The R programming language [@R] 
 and the following R packages were used to perform the analysis: 
-knitr (Xie 2014), tidyverse (Wickham 2017), and Quarto (Allaire et al 2022). 
-*Note: this report is adapted from Timbers (2020).*
+knitr [@knitr], tidyverse [@tidyverse], and Quarto [@Allaire_Quarto_2022]. 
+*Note: this report is adapted from [@ttimbers-horses].*
 
 Results
 
-![](../results/horse_pops_plot.png)
+```{r}
+#| label: fig-horse-pops
+#| fig-cap: "Horse populations for all provinces in Canada from 1906 - 1972."
+#| fig-width: 100
+knitr::include_graphics("../results/horse_pops_plot.png")
+```
 
-Figure 1: Horse populations for all provinces in Canada from 1906 - 1972.
-
-We can see from Figure 1 that Ontario, Saskatchewan and Alberta 
+We can see from @fig-horse-pops that Ontario, Saskatchewan and Alberta 
 have had the highest horse populations in Canada. 
 All provinces have had a decline in horse populations since 1940. 
 This is likely due to the rebound of the Canadian automotive industry 
@@ -44,11 +50,11 @@ to further support this hypothesis.
 
 Suppose we were interested in looking in more closely at the province 
 with the highest spread (in terms of standard deviation) of horse populations. 
-We present the standard deviations in Table 1.
-
-Table 1. Standard deviation of historical (1906-1972) horse populations for each Canadian province.
+We present the standard deviations in @tbl-horses-sd.
 
 ```{r}
+#| label: tbl-horses-sd
+#| tbl-cap: "Standard deviation of historical (1906-1972) horse populations for each Canadian province."
 horses_sd_table <- read_csv("../results/horses_sd.csv")
 largest_sd <- horses_sd_table$Province[1]
 knitr::kable(horses_sd_table)
@@ -58,12 +64,33 @@ Note that we define standard deviation (of a sample) as
 
 $$s = \sqrt{\frac{\sum_{i=1}^N (x_i - \overline{x})^2}{N-1} }$$
 
-Additionally, note that in Table 1 we consider the sample standard deviation of the number of horses during the same time span as Figure 1.
+Additionally, note that in Table 1 we consider the sample standard deviation of the number of horses during the same time span as @fig-horse-pops.
 
-![](../results/horse_pop_plot_largest_sd.png)
+```{r}
+#| label: fig-horse-largest-sd
+#| fig-cap: "Horse populations for the province with the largest standard deviation."
+#| fig-width: 70
+knitr::include_graphics("../results/horse_pop_plot_largest_sd.png")
+```
 
-Figure 2: Horse populations for the province with the largest standard deviation
-
-In Figure 2 we zoom in and look at the province of ???, which had the largest spread of values in terms of standard deviation.
+In @fig-horse-largest-sd we zoom in and look at the province of `r largest_sd`, which had the largest spread of values in terms of standard deviation.
 
 References
+1. **YAML Header**:
+   - Added `bibliography: references.bib` to specify the BibTeX file for references.
+
+2. **Cross-Referencing**:
+   - Replaced hardcoded references (e.g., "Figure 1", "Table 1") with dynamic cross-references (e.g., `@fig-horse-pops`, `@tbl-horses-sd`).
+
+3. **Dynamic Placeholder**:
+   - Replaced `???` with `r largest_sd` to dynamically insert the province with the largest standard deviation.
+
+4. **Hidden Code Chunks**:
+   - Added `#| echo: false` to hide code chunks in the rendered report.
+
+5. **Figure and Table Formatting**:
+   - Added `fig-cap` and `tbl-cap` for figure and table captions.
+   - Used `knitr::include_graphics()` for figures and `knitr::kable()` for tables.
+
+6. **Math Equations**:
+   - Used LaTeX syntax for the standard deviation formula.
